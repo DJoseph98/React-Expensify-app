@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`expense list with no passed data 1`] = `
+<div>
+  <h2>
+    Expenses List
+  </h2>
+  <p>
+    No expenses
+  </p>
+</div>
+`;
+
+exports[`expense list with passed data 1`] = `
+<div>
+  <h2>
+    Expenses List
+  </h2>
+  <u1>
+    <Connect(ExpenseListeItem)
+      createdAt={"1970-01-01T00:00:00.000Z"}
+      description="Water Bill"
+      id="1"
+      key="1"
+      price={2500}
+      square=""
+    />
+    <Connect(ExpenseListeItem)
+      createdAt={-345600000}
+      description="Gaz Bisssll"
+      id="2"
+      key="2"
+      price={25000}
+      square=""
+    />
+    <Connect(ExpenseListeItem)
+      createdAt={345600000}
+      description="Train Bill"
+      id="3"
+      key="3"
+      price={20}
+      square=""
+    />
+  </u1>
+</div>
+`;

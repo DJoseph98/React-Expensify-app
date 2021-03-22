@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`expense list item 1`] = `
+<li>
+  <Link
+    replace={false}
+    to="/edit/2"
+  >
+    Description : 
+    Gaz Bisssll
+  </Link>
+  - Price : 
+  25000
+   - createdAt : 
+  -345600000
+</li>
+`;
