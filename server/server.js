@@ -10,6 +10,6 @@ app.get('*', (req, res) => { // match toute les url qui n'éxiste pas
     res.sendFile(path.join(publicPath, 'index.html'));
 })
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Listen port 3000');
 });
