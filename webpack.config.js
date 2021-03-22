@@ -8,7 +8,7 @@ module.exports = (env) => { // transform en fonction car accées paramètre
     return {
         entry: './src/app.js',
         output: {
-            path: path.join(__dirname, 'public'),
+            path: path.join(__dirname, 'public' , 'dist'),
             filename: 'bundle.js'
         },
         module: {
@@ -43,7 +43,8 @@ module.exports = (env) => { // transform en fonction car accées paramètre
         devtool: isProduction ? 'source-map' : 'inline-source-map', // permet de renvoyer précisement à la source si erreur
             devServer: {
         contentBase: path.join(__dirname, 'public'),
-            historyApiFallback: true
+            historyApiFallback: true,
+            publicPath: '/dist/'
     }
 }
 }
