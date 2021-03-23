@@ -10,8 +10,8 @@ exports[`expense list item 1`] = `
     Gaz Bisssll
   </Link>
   - Price : 
-  25000
+  $25,000.00
    - createdAt : 
-  -345600000
+  12-28-1969
 </li>
 `;
