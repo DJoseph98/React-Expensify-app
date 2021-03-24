@@ -9,6 +9,7 @@ import { addState } from './actions/expenses';
 import moment from 'moment';
 import 'react-dates/lib/css/_datepicker.css';
 
+
 const store = configureStore(); // instancier store
 
 const action1 = store.dispatch(addState({ description: 'Water bill', price: 3, createdAt: moment().add('4', 'days').valueOf() }));
