@@ -1,22 +1,30 @@
-import uuid from 'uuid';
+import database from '../firebase/firebase';
+import moment from 'moment';
 
-export const addState = (
-    { //valeur par defaut
-        square = '',
-        description = '',
-        price = 0,
-        createdAt = 0
-    } = {}
-) => ({
+export const addState = (expense) => ({
     type: 'ADD_EXPENSE',
-    expense: {
-        id: uuid(),
-        square,
-        description,
-        price,
-        createdAt
-    }
+    expense
 });
+
+export const addStartState = (expenseData = {}) => { // custom middleware pour ajouter nouvelle fonction a appeler pour ajouter une data a redux store
+    return (dispatch) => { // retourne une fonction avec dispatch
+        const {
+            description = '',
+            square = 0,
+            price = 0,
+            createdAt = 1000
+        } = expenseData;
+    
+        const expense = { description, square, price, createdAt };
+        
+        return database.ref('expenses').push(expense).then((ref) => {
+            dispatch.addState({
+                id: ref.key,
+                ...expense
+            });
+        });
+    };
+};
 
 export const removeState = ({ id } = {} /* set valeur default mais rend obligatoire l'argument*/) => (
     {

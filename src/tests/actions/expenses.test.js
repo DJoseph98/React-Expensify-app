@@ -1,4 +1,9 @@
-import { addState, removeState, editState } from '../../actions/expenses';
+import thunk from 'redux-thunk';
+import configureMockStore from 'redux-mock-store'; // mock for store redux
+import { addStartState, removeState, editState } from '../../actions/expenses';
+import database from '../../firebase/firebase';
+
+const createMockStore = configureMockStore([thunk]);
 
 test('remove state', () => {
     const result = removeState({ id: '123' });
@@ -19,7 +24,66 @@ test('edit state', () => {
         })
 });
 
-test('add state', () => {
+test('add state to database', (done) => { //done permet de stopper la fonction de test ou on veut
+    const store = createMockStore({});
+    const expenseData = {
+        square: 0,
+        description: 'mon appart',
+        note: '1 mètre carré',
+        price: 1111000,
+        createdAt: 1000
+    };
+
+    store.dispatch(addStartState(expenseData)).then(() => {
+        const actions = store.getActions(); //récupère les actions de expense
+        expect(actions[0]).toEqual({
+            type: 'ADD_EXPENSE',
+            expense: {
+                id: expect.any(String),
+                ...expenseData
+            }
+        });
+
+        //promise chaining
+        return database.ref(`expenses/${actions[0].expense.id}`).once('value');
+    }).then((snapshot) => {
+        expect(snapshot.val()).toEqual(expenseData);
+        done(); // ici permet de stoper le test jusqu'au retour de la promise
+    });
+});
+
+test('add state to database with default value', (done) => { //done permet de stopper la fonction de test ou on veut
+    const store = createMockStore({});
+    const expenseDefault = {
+        square: 0,
+        description: '',
+        note: '',
+        price: 0,
+        createdAt: 0
+    };
+
+    store.dispatch(addStartState(expenseDefault)).then(() => {
+        const actions = store.getActions(); //récupère les actions de expense
+        expect(actions[0]).toEqual({
+            type: 'ADD_EXPENSE',
+            expense: {
+                id: expect.any(String),
+                ...expenseDefault
+            }
+        });
+
+        //promise chaining
+        return database.ref(`expenses/${actions[0].expense.id}`).once('value');
+    }).then((snapshot) => {
+        expect(snapshot.val()).toEqual(expenseDefault);
+        done(); // ici permet de stoper le test jusqu'au retour de la promise
+    });
+});
+
+/* test('add state to database with default value', () => {
+
+}); */
+/* test('add state', () => {
     const expenseData = {
         square: '1 mètre carré',
         description: 'mon appart',
@@ -33,7 +97,7 @@ test('add state', () => {
         type: 'ADD_EXPENSE',
         expense: {
             ...expenseData,
-            id: expect.any(String) // sachant que l'id est générer automatiquement, aucun moyen de le récupérer, ducoup on check si c'est un string qui est généré 
+            id: expect.any(String) // sachant que l'id est générer automatiquement, aucun moyen de le récupérer, ducoup on check si c'est un string qui est généré
         }
     });
 });
@@ -50,4 +114,4 @@ test('add state default value', () => {
             createdAt: 0
         }
     })
-});
+}); */

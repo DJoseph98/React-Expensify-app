@@ -6,6 +6,7 @@ import AddExpensePage from '../components/addExpense';
 import EditExpensePage from '../components/editExpense';
 import HelpPage from '../components/helpPage';
 import NotFoundPage from '../components/notFoundPage';
+import { createBrowserHistory } from 'history';
 
 const AppRouter = () => (
     <BrowserRouter>

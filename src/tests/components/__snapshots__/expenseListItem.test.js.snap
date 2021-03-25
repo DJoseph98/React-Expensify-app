@@ -3,7 +3,6 @@
 exports[`expense list item 1`] = `
 <li>
   <Link
-    replace={false}
     to="/edit/2"
   >
     Description : 
