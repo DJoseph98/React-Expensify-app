@@ -18,26 +18,29 @@ exports[`expense list with passed data 1`] = `
   </h2>
   <u1>
     <Connect(ExpenseListeItem)
-      createdAt={"1970-01-01T00:00:00.000Z"}
+      createdAt={0}
       description="Water Bill"
       id="1"
       key="1"
+      note=""
       price={2500}
       square=""
     />
     <Connect(ExpenseListeItem)
-      createdAt={-345600000}
+      createdAt="-345600000"
       description="Gaz Bisssll"
       id="2"
       key="2"
+      note=""
       price={25000}
       square=""
     />
     <Connect(ExpenseListeItem)
-      createdAt={345600000}
+      createdAt="345600000"
       description="Train Bill"
       id="3"
       key="3"
+      note=""
       price={20}
       square=""
     />

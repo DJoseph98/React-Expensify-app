@@ -45,6 +45,7 @@ test('edit state', () => {
             square: 'dzadadaz',
             description: 'cast bill',
             price: '0',
+            note: "",
             createdAt: moment()
         }
     }
@@ -55,7 +56,17 @@ test('edit state', () => {
             square: 'dzadadaz',
             description: 'cast bill',
             price: '0',
+             note: "",
             createdAt: moment()
         }
     );
+});
+
+test('shoud set expenses', () => {
+    const action = {
+        type: 'SET_STATES',
+        expenses: tabExpensesTest[0]
+    }
+    const result = expensesReducer(tabExpensesTest, action);
+    expect(result).toEqual(tabExpensesTest[0]);
 });

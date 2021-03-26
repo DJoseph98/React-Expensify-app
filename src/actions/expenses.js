@@ -14,14 +14,14 @@ export const addStartState = (expenseData = {}) => { // custom middleware pour a
             price = 0,
             createdAt = 1000
         } = expenseData;
-    
+
         const expense = { description, square, price, createdAt };
-        
+
         return database.ref('expenses').push(expense).then((ref) => {
-            dispatch.addState({
+            dispatch(addState({
                 id: ref.key,
                 ...expense
-            });
+            }));
         });
     };
 };
@@ -40,3 +40,26 @@ export const editState = (id, updates) => (
         updates
     }
 );
+
+export const setStates = (expenses) => (
+    {
+        type: 'SET_STATES',
+        expenses
+    }
+);
+
+export const setStartStates = () => {
+    return (dispatch) => {
+        return database.ref('expenses').once('value').then((snapshot) => {
+            const tabExpenses = [];
+
+            snapshot.forEach(expense => {
+                tabExpenses.push({
+                    id: expense.key,
+                    ...expense.val()
+                })
+            });
+            dispatch(setStates(tabExpenses));
+        });
+    }
+};

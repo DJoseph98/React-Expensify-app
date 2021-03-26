@@ -5,9 +5,10 @@ exports[`should render edit form 1`] = `
   <ExpenseForm
     expense={
       Object {
-        "createdAt": -345600000,
+        "createdAt": "-345600000",
         "description": "Gaz Bisssll",
         "id": "2",
+        "note": "",
         "price": 25000,
         "square": "",
       }

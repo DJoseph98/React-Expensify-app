@@ -11,6 +11,6 @@ exports[`expense list item 1`] = `
   - Price : 
   $25,000.00
    - createdAt : 
-  12-28-1969
+  Invalid date
 </li>
 `;
