@@ -49,7 +49,7 @@ module.exports = (env) => { // transform en fonction car accées paramètre
     },
         plugins: [
             CSSExtract,// use style.css
-            new webpack.DefinePlugin({ // define env var for client side
+            new DefinePlugin({ // define env var for client side
                 'process.env.FIREBASE_API_KEY':JSON.stringify(process.env.FIREBASE_API_KEY), // JSON.stringify is safe tips to automaticly put var into quotes 
                 'process.env.FIREBASE_AUTH_DOMAIN':JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
                 'process.env.FIREBASE_DATABASE_URL':JSON.stringify(process.env.FIREBASE_DATABASE_URL),
