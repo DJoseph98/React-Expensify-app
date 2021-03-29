@@ -14,5 +14,4 @@ export default (expenses, { text, sortBy, startDate, endDate }) => {
         else if (sortBy === 'price')
             return a.price < b.price ? 1 : -1;
     })
-
 };

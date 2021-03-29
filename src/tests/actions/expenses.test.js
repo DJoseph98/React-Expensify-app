@@ -1,6 +1,6 @@
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store'; // mock for store redux
-import { addStartState, addState, removeState, editState, setStates, setStartStates, removeStartState } from '../../actions/expenses';
+import { addStartState, addState, removeState, editState, setStates, setStartStates, removeStartState, startEditState } from '../../actions/expenses';
 import database from '../../firebase/firebase';
 import expenses from '../fixtures/expenses';
 
@@ -61,34 +61,6 @@ test('add state to database', (done) => { //done permet de stopper la fonction d
     });
 });
 
-test('add state to database with default value', (done) => { //done permet de stopper la fonction de test ou on veut
-    const store = createMockStore({});
-    const expenseDefault = {
-        square: 0,
-        description: '',
-        note: '',
-        price: 0,
-        createdAt: 0
-    };
-
-    store.dispatch(addStartState(expenseDefault)).then(() => {
-        const actions = store.getActions(); //récupère les actions de expense
-        expect(actions[0]).toEqual({
-            type: 'ADD_EXPENSE',
-            expense: {
-                id: expect.any(String),
-                ...expenseDefault
-            }
-        });
-
-        //promise chaining
-        return database.ref(`expenses/${actions[0].expense.id}`).once('value');
-    }).then((snapshot) => {
-        expect(snapshot.val()).toEqual(expenseDefault);
-        done(); // ici permet de stoper le test jusqu'au retour de la promise
-    });
-});
-
 /* test('add state to database with default value', () => {
 
 }); */
@@ -133,6 +105,30 @@ test('set states from value', () => {
     });
 });
 
+test('should edit state from firebase', (done) => {
+    const store = createMockStore({});
+    const id = expenses[0].id;
+    const updates = {
+        square:'',
+        note:'test',
+        description:'caca',
+        price: 2500,
+        createdAt:0
+    }
+    store.dispatch(startEditState(id, updates )).then(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type: 'EDIT_EXPENSE',
+            id,
+            updates
+        });
+        return database.ref(`expenses/${id}`).once('value').then((snapshot) => { //check expenses edited
+            expect(snapshot.val()).toEqual(updates);
+            done();
+        })
+    })
+});
+
 test('should fetch data from firebase', (done) => {
     const store = createMockStore({});
     store.dispatch(setStartStates()).then(() => {
@@ -145,7 +141,7 @@ test('should fetch data from firebase', (done) => {
     });
 });
 
-test('should remove data from firebase by id', (done) => {
+/* test('should remove data from firebase by id', (done) => {
     const store = createMockStore({});
     const id = expenses[0].id;
     store.dispatch(removeStartState({ id })).then(() => {
@@ -159,4 +155,4 @@ test('should remove data from firebase by id', (done) => {
             done();
         })
     });
-});
+}); */

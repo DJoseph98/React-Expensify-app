@@ -1,5 +1,5 @@
-import firebase from 'firebase';  //permet de créer l'objet firebase et d'avoir accées à toute les fonctions
-
+import firebase from 'firebase/app';  //permet de créer l'objet firebase et d'avoir accées à toute les fonctions
+import 'firebase/database';  //permet de créer l'objet firebase et d'avoir accées à toute les fonctions
 //set config for firebase using env variables
 var firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,

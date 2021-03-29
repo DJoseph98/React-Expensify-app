@@ -34,6 +34,16 @@ export const editState = (id, updates) => (
     }
 );
 
+export const startEditState = (id, updates) => {
+    return (dispatch) => {
+        return database.ref(`expenses/${id}`).update(JSON.parse(JSON.stringify(updates))).then(() => {
+            dispatch(editState(id, updates));
+        }).catch((e) => {
+            console.log(e);
+        });
+    };
+};
+
 export const setStates = (expenses) => (
     {
         type: 'SET_STATES',

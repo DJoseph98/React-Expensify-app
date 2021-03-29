@@ -16,7 +16,8 @@ class ExpenseListFilter extends React.Component {
         this.setState(() => ({ calendarFocused }));
     }
     onTextChange = (e) => {
-        this.props.setTextFilter(e.target.value); // set dans le store les data avec le tri qu'on veux
+        console.log(e.target.value)
+        //this.props.setTextFilter(e.target.value); // set dans le store les data avec le tri qu'on veux
     }
     onSortByChange = (e) => {
         switch (e.target.value) {
