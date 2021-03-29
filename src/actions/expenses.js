@@ -26,13 +26,6 @@ export const addStartState = (expenseData = {}) => { // custom middleware pour a
     };
 };
 
-export const removeState = ({ id } = {} /* set valeur default mais rend obligatoire l'argument*/) => (
-    {
-        type: 'REMOVE_EXPENSE',
-        id
-    }
-);
-
 export const editState = (id, updates) => (
     {
         type: 'EDIT_EXPENSE',
@@ -61,5 +54,22 @@ export const setStartStates = () => {
             });
             dispatch(setStates(tabExpenses));
         });
+    }
+};
+
+export const removeState = ({ id } = {} /* set valeur default mais rend obligatoire l'argument*/) => (
+    {
+        type: 'REMOVE_EXPENSE',
+        id
+    }
+);
+
+export const removeStartState = ({ id } = {}) => {
+    return (dispatch) => {
+        // connect to firebase and remove document
+        return database.ref(`expenses/${id}`).remove().then(() => {
+            // remove data from id
+            dispatch(removeState({ id }));
+        })
     }
 };

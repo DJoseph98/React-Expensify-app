@@ -1,6 +1,6 @@
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store'; // mock for store redux
-import { addStartState, removeState, editState, setStates, setStartStates } from '../../actions/expenses';
+import { addStartState, addState, removeState, editState, setStates, setStartStates, removeStartState } from '../../actions/expenses';
 import database from '../../firebase/firebase';
 import expenses from '../fixtures/expenses';
 
@@ -33,7 +33,7 @@ test('edit state', () => {
         })
 });
 
-/* test('add state to database', (done) => { //done permet de stopper la fonction de test ou on veut
+test('add state to database', (done) => { //done permet de stopper la fonction de test ou on veut
     const store = createMockStore({});
     const expenseData = {
         square: 0,
@@ -87,7 +87,7 @@ test('add state to database with default value', (done) => { //done permet de st
         expect(snapshot.val()).toEqual(expenseDefault);
         done(); // ici permet de stoper le test jusqu'au retour de la promise
     });
-}); */
+});
 
 /* test('add state to database with default value', () => {
 
@@ -142,5 +142,21 @@ test('should fetch data from firebase', (done) => {
             expenses
         });
         done();
+    });
+});
+
+test('should remove data from firebase by id', (done) => {
+    const store = createMockStore({});
+    const id = expenses[0].id;
+    store.dispatch(removeStartState({ id })).then(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type: 'REMOVE_EXPENSE',
+            id
+        });
+        return database.ref(`expenses/${id}`).once('value').then((snapshot) => { //check id expenses removed
+            expect(snapshot.val()).toBeFalsy;
+            done();
+        })
     });
 });

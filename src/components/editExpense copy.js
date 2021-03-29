@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import ExpenseForm from './expenseForm';
 import { connect } from 'react-redux';
 import { editState, removeState } from '../actions/expenses';
@@ -37,4 +37,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         }
 }
 
-export default connect(MapStateToProps/*state*/, mapDispatchToProps/*dispatch*/)(EditExpensePage);
+export default connect(MapStateToProps/*state*/, mapDispatchToProps/*dispatch*/)(EditExpensePage); */
