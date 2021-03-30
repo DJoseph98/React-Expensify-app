@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';  //permet de créer l'objet firebase et d'avoir accées à toute les fonctions
 import 'firebase/database';
+import 'firebase/auth';
 
 //set config for firebase using env variables
 var firebaseConfig = {
@@ -14,6 +15,7 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const database = firebase.database();
+const database = firebase.database(); 
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider(); // google provider pour se connecter
 
-export { firebase, database as default };
+export { firebase, googleAuthProvider, database as default };

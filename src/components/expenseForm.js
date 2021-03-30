@@ -43,7 +43,7 @@ export default class ExpenseForm extends React.Component {
                 description: this.state.description,
                 price: parseFloat(this.state.price, 10) * 100,
                 createdAt: this.state.createdAt.valueOf(),
-                note: this.state.note  
+                note: this.state.note ? this.state.note : ''  //car firebase n'aime pas des undefined
             });
         }
     };
