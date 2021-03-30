@@ -4,6 +4,8 @@ import { addStartState, addState, removeState, editState, setStates, setStartSta
 import database from '../../firebase/firebase';
 import expenses from '../fixtures/expenses';
 
+const uid = 'someuidtest';
+const defaultAuthState = { auth: { uid } };
 const createMockStore = configureMockStore([thunk]);
 
 beforeEach((done) => {
@@ -11,7 +13,7 @@ beforeEach((done) => {
     expenses.forEach(({ id, description, note, price, createdAt, square }) => {
         expenseData[id] = { description, note, price, createdAt, square };
     })
-    database.ref('expenses').set(expenseData).then(() => done());
+    database.ref(`users/${uid}/expenses`).set(expenseData).then(() => done());
 });
 
 test('remove state', () => {
@@ -34,7 +36,7 @@ test('edit state', () => {
 });
 
 test('add state to database', (done) => { //done permet de stopper la fonction de test ou on veut
-    const store = createMockStore({});
+    const store = createMockStore(defaultAuthState);
     const expenseData = {
         square: 0,
         description: 'mon appart',
@@ -54,7 +56,7 @@ test('add state to database', (done) => { //done permet de stopper la fonction d
         });
 
         //promise chaining
-        return database.ref(`expenses/${actions[0].expense.id}`).once('value');
+        return database.ref(`users/${uid}/expenses/${actions[0].expense.id}`).once('value');
     }).then((snapshot) => {
         expect(snapshot.val()).toEqual(expenseData);
         done(); // ici permet de stoper le test jusqu'au retour de la promise
@@ -66,6 +68,7 @@ test('add state to database', (done) => { //done permet de stopper la fonction d
 }); */
 test('add state', () => {
     const expenseData = {
+        id: '123',
         square: '1 mètre carré',
         description: 'mon appart',
         price: 1111000,
@@ -106,23 +109,23 @@ test('set states from value', () => {
 });
 
 test('should edit state from firebase', (done) => {
-    const store = createMockStore({});
+    const store = createMockStore(defaultAuthState);
     const id = expenses[0].id;
     const updates = {
-        square:'',
-        note:'test',
-        description:'caca',
+        square: '',
+        note: 'test',
+        description: 'caca',
         price: 2500,
-        createdAt:0
+        createdAt: 0
     }
-    store.dispatch(startEditState(id, updates )).then(() => {
+    store.dispatch(startEditState(id, updates)).then(() => {
         const actions = store.getActions();
         expect(actions[0]).toEqual({
             type: 'EDIT_EXPENSE',
             id,
             updates
         });
-        return database.ref(`expenses/${id}`).once('value').then((snapshot) => { //check expenses edited
+        return database.ref(`users/${uid}/expenses/${id}`).once('value').then((snapshot) => { //check expenses edited
             expect(snapshot.val()).toEqual(updates);
             done();
         })
@@ -130,7 +133,7 @@ test('should edit state from firebase', (done) => {
 });
 
 test('should fetch data from firebase', (done) => {
-    const store = createMockStore({});
+    const store = createMockStore(defaultAuthState);
     store.dispatch(setStartStates()).then(() => {
         const actions = store.getActions();
         expect(actions[0]).toEqual({
@@ -141,8 +144,8 @@ test('should fetch data from firebase', (done) => {
     });
 });
 
-/* test('should remove data from firebase by id', (done) => {
-    const store = createMockStore({});
+test('should remove data from firebase by id', (done) => {
+    const store = createMockStore(defaultAuthState);
     const id = expenses[0].id;
     store.dispatch(removeStartState({ id })).then(() => {
         const actions = store.getActions();
@@ -150,9 +153,9 @@ test('should fetch data from firebase', (done) => {
             type: 'REMOVE_EXPENSE',
             id
         });
-        return database.ref(`expenses/${id}`).once('value').then((snapshot) => { //check id expenses removed
+        return database.ref(`users/${uid}/expenses/${id}`).once('value').then((snapshot) => { //check id expenses removed
             expect(snapshot.val()).toBeFalsy;
             done();
         })
     });
-}); */
+});

@@ -7,7 +7,8 @@ export const addState = (expense) => ({
 });
 
 export const addStartState = (expenseData = {}) => { // custom middleware pour ajouter nouvelle fonction a appeler pour ajouter une data a redux store
-    return (dispatch) => { // retourne une fonction avec dispatch
+    return (dispatch, getState) => { // retourne une fonction avec dispatch
+        const uid = getState().auth.uid;
         const {
             description = '',
             square = 0,
@@ -17,7 +18,7 @@ export const addStartState = (expenseData = {}) => { // custom middleware pour a
 
         const expense = { description, square, price, createdAt };
 
-        return database.ref('expenses').push(expense).then((ref) => {
+        return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => {
             dispatch(addState({
                 id: ref.key,
                 ...expense
@@ -35,8 +36,9 @@ export const editState = (id, updates) => (
 );
 
 export const startEditState = (id, updates) => {
-    return (dispatch) => {
-        return database.ref(`expenses/${id}`).update(updates).then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/expenses/${id}`).update(updates).then(() => {
             dispatch(editState(id, updates));
         }).catch((e) => {
             console.log(e);
@@ -52,8 +54,9 @@ export const setStates = (expenses) => (
 );
 
 export const setStartStates = () => {
-    return (dispatch) => {
-        return database.ref('expenses').once('value').then((snapshot) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/expenses`).once('value').then((snapshot) => {
             const tabExpenses = [];
 
             snapshot.forEach(expense => {
@@ -75,9 +78,10 @@ export const removeState = ({ id } = {} /* set valeur default mais rend obligato
 );
 
 export const removeStartState = ({ id } = {}) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
         // connect to firebase and remove document
-        return database.ref(`expenses/${id}`).remove().then(() => {
+        return database.ref(`users/${uid}/expenses`).remove().then(() => {
             // remove data from id
             dispatch(removeState({ id }));
         })
