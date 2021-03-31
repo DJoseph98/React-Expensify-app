@@ -1,25 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`viewing 2 expenses list 1`] = `
-<div>
-  Total expenses : 
-  0
-  <div>
-    Total amount expenses : 
-    $10.00
-     
+<div
+  className="page-header"
+>
+  <div
+    className="content-container"
+  >
+    <h1
+      className="page-header__title"
+    >
+      Total expenses : 
+      <span>
+        0
+      </span>
+      <div>
+        Total amount expenses : 
+        <span>
+          $10.00
+        </span>
+         
+      </div>
+    </h1>
+    <div
+      className="page-header__actions"
+    >
+      <Link
+        className="button"
+        to="/create"
+      >
+        Add expense
+      </Link>
+    </div>
   </div>
 </div>
 `;
 
 exports[`viewing 3 expenses list 1`] = `
-<div>
-  Total expenses : 
-  23
-  <div>
-    Total amount expenses : 
-    $1,051,515.00
-     
+<div
+  className="page-header"
+>
+  <div
+    className="content-container"
+  >
+    <h1
+      className="page-header__title"
+    >
+      Total expenses : 
+      <span>
+        23
+      </span>
+      <div>
+        Total amount expenses : 
+        <span>
+          $1,051,515.00
+        </span>
+         
+      </div>
+    </h1>
+    <div
+      className="page-header__actions"
+    >
+      <Link
+        className="button"
+        to="/create"
+      >
+        Add expense
+      </Link>
+    </div>
   </div>
 </div>
 `;

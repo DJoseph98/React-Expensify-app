@@ -1,49 +1,103 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`expense list with no passed data 1`] = `
-<div>
+<div
+  className="content-container"
+>
+  <div
+    className="list-header"
+  >
+    <div
+      className="show-for-mobile"
+    >
+      Expenses
+    </div>
+    <div
+      className="show-for-dekstop"
+    >
+      Expense
+    </div>
+    <div
+      className="show-for-dekstop"
+    >
+      Price
+    </div>
+  </div>
   <h2>
     Expenses List
   </h2>
-  <p>
-    No expenses
-  </p>
+  <div
+    className="list-body"
+  >
+    <div
+      className="list-item list-item--message"
+    >
+      <span>
+        No expenses
+      </span>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`expense list with passed data 1`] = `
-<div>
+<div
+  className="content-container"
+>
+  <div
+    className="list-header"
+  >
+    <div
+      className="show-for-mobile"
+    >
+      Expenses
+    </div>
+    <div
+      className="show-for-dekstop"
+    >
+      Expense
+    </div>
+    <div
+      className="show-for-dekstop"
+    >
+      Price
+    </div>
+  </div>
   <h2>
     Expenses List
   </h2>
-  <u1>
-    <Connect(ExpenseListeItem)
-      createdAt={0}
-      description="Water Bill"
-      id="1"
-      key="1"
-      note=""
-      price={2500}
-      square=""
-    />
-    <Connect(ExpenseListeItem)
-      createdAt="-345600000"
-      description="Gaz Bisssll"
-      id="2"
-      key="2"
-      note=""
-      price={25000}
-      square=""
-    />
-    <Connect(ExpenseListeItem)
-      createdAt="345600000"
-      description="Train Bill"
-      id="3"
-      key="3"
-      note=""
-      price={20}
-      square=""
-    />
-  </u1>
+  <div
+    className="list-body"
+  >
+    <u1>
+      <Connect(ExpenseListeItem)
+        createdAt={0}
+        description="Water Bill"
+        id="1"
+        key="1"
+        note=""
+        price={2500}
+        square=""
+      />
+      <Connect(ExpenseListeItem)
+        createdAt="-345600000"
+        description="Gaz Bisssll"
+        id="2"
+        key="2"
+        note=""
+        price={25000}
+        square=""
+      />
+      <Connect(ExpenseListeItem)
+        createdAt="345600000"
+        description="Train Bill"
+        id="3"
+        key="3"
+        note=""
+        price={20}
+        square=""
+      />
+    </u1>
+  </div>
 </div>
 `;

@@ -4,16 +4,25 @@ import ExpenseListeItem from './expenseListItem';
 import filteredExpenses from '../selectors/expenses';
 
 export const ExpenseListe = (props) => ( //component a render
-    <div>
-    <h2>Expenses List</h2>
-        {props.expenses.length === 0 ? (
-            <p>No expenses</p>
-        ) : (
-            <u1>
-                {props.expenses.map(expense => <ExpenseListeItem key={expense.id}{...expense} />)}
-            </u1>
-        )
-        }
+    <div className="content-container">
+        <div className="list-header">
+            <div className="show-for-mobile">Expenses</div>
+            <div className="show-for-dekstop">Expense</div>
+            <div className="show-for-dekstop">Price</div>
+        </div>
+        <h2>Expenses List</h2>
+        <div className="list-body">
+            {props.expenses.length === 0 ? (
+                <div className="list-item list-item--message">
+                    <span>No expenses</span>
+                </div>
+            ) : (
+                <u1>
+                    {props.expenses.map(expense => <ExpenseListeItem key={expense.id}{...expense} />)}
+                </u1>
+            )
+            }
+        </div>
     </div>
 );
 

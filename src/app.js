@@ -9,6 +9,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import { setStartStates } from './actions/expenses';
 import { firebase } from './firebase/firebase';
 import { login, logout } from './actions/auth';
+import LoadingPage from './components/loadingPage';
 
 const store = configureStore(); // instancier stores
 
@@ -26,7 +27,7 @@ const renderApp = () => { // fonction permet de savoir si le react dom est displ
     }
 }
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged((user) => { //check si user connected
     if (user) { // is user connecter

@@ -3,9 +3,9 @@ import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
 
 export default class ExpenseForm extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props); // récupère ce qui est passé dans le parent
-        this.state= { // set données si existe dans parent
+        this.state = { // set données si existe dans parent
             description: props.expense ? props.expense.description : '',
             note: props.expense ? props.note : '',
             price: props.expense ? (props.expense.price / 100).toString() : '',
@@ -49,35 +49,38 @@ export default class ExpenseForm extends React.Component {
     };
     render() {
         return (
-            <div>
-            {this.state.error && <p>{this.state.error}</p>}
-                <form onSubmit={this.handleSubmitForm}>
-                    <input type="text"
-                        name="description"
-                        placeholder="description"
-                        autoFocus
-                        value={this.state.description}
-                        onChange={this.onDescriptionChange} />
-                    <input type="text"
-                        name="price"
-                        placeholder="price"
-                        value={this.state.price}
-                        onChange={this.onPriceChange} />
-                    <textarea
-                        placeholder="Add note here"
-                        onChange={this.onNoteChange}
-                        value={this.state.note}
-                    ></textarea>
-                    <SingleDatePicker //set SingleDatePicker https://github.com/airbnb/react-dates
-                        date={this.state.createdAt}
-                        onDateChange={this.onDateChange}
-                        focused={this.state.calendarFocused}
-                        onFocusChange={this.onFocusChange}
-                        numberOfMonths={1}
-                        isOutsideRange={() => false} />
-                    <button>Test</button>
-                </form>
-            </div>
+            <form className="form" onSubmit={this.handleSubmitForm}>
+                {this.state.error && <p className="form__error">{this.state.error}</p>}
+                <input type="text"
+                    name="description"
+                    placeholder="description"
+                    autoFocus
+                    className="text-input"
+                    value={this.state.description}
+                    onChange={this.onDescriptionChange} />
+                <input type="text"
+                    name="price"
+                    placeholder="price"
+                    className="text-input"
+                    value={this.state.price}
+                    onChange={this.onPriceChange} />
+                <textarea
+                    placeholder="Add note here"
+                    className="textarea"
+                    onChange={this.onNoteChange}
+                    value={this.state.note}
+                ></textarea>
+                <SingleDatePicker //set SingleDatePicker https://github.com/airbnb/react-dates
+                    date={this.state.createdAt}
+                    onDateChange={this.onDateChange}
+                    focused={this.state.calendarFocused}
+                    onFocusChange={this.onFocusChange}
+                    numberOfMonths={1}
+                    isOutsideRange={() => false} />
+                <div>
+                    <button className="button">Save Expense</button>
+                </div>
+            </form>
         )
     }
 }

@@ -1,16 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`expense list item 1`] = `
-<li>
-  <Link
-    to="/edit/2"
+<Link
+  className="list-item"
+  to="/edit/2"
+>
+  <div>
+    <h3
+      className="list-item__title"
+    >
+      Gaz Bisssll
+    </h3>
+    <span
+      className="list-item__sub-title"
+    >
+      Invalid date
+    </span>
+  </div>
+  <h3
+    className="list-item__data"
   >
-    Description : 
-    Gaz Bisssll
-  </Link>
-  - Price : 
-  $25,000.00
-   - createdAt : 
-  Invalid date
-</li>
+    $25,000.00
+  </h3>
+</Link>
 `;

@@ -11,7 +11,7 @@ exports[`should be LoginPage page 1`] = `
       "entries": Array [
         Object {
           "hash": "",
-          "key": "bf2zf6",
+          "key": "uo51j3",
           "pathname": "/",
           "search": "",
           "state": undefined,
@@ -25,7 +25,7 @@ exports[`should be LoginPage page 1`] = `
       "listen": [Function],
       "location": Object {
         "hash": "",
-        "key": "bf2zf6",
+        "key": "uo51j3",
         "pathname": "/",
         "search": "",
         "state": undefined,

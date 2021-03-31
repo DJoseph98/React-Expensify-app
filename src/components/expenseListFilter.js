@@ -27,19 +27,27 @@ class ExpenseListFilter extends React.Component {
     }
     render() {
         return (
-            <div>
-                <input type="text" value={this.props.filter.text} onChange={this.onTextChange}></input>
-                <select value={this.props.filter.sortBy} onChange={this.onSortByChange}>
-                    <option value="date">Date</option>
-                    <option value="price">Price</option>
-                </select>
-                <DateRangePicker
-                    startDate={this.props.filter.startDate}
-                    endDate={this.props.filter.endDate}
-                    onDatesChange={this.onDatesChange}
-                    focusedInput={this.state.calendarFocused}
-                    onFocusChange={this.onFocusChange} // PropTypes.func.isRequired,
-                />
+            <div className="content-container">
+                <div className="input-group">
+                    <div className="input-group__item">
+                        <input type="text" className="text-input" placeholder="Search expenses" value={this.props.filter.text} onChange={this.onTextChange}></input>
+                    </div>
+                    <div className="input-group__item">
+                        <select className="select" value={this.props.filter.sortBy} onChange={this.onSortByChange}>
+                            <option value="date">Date</option>
+                            <option value="price">Price</option>
+                        </select>
+                    </div>
+                    <div className="input-group__item">
+                        <DateRangePicker
+                            startDate={this.props.filter.startDate}
+                            endDate={this.props.filter.endDate}
+                            onDatesChange={this.onDatesChange}
+                            focusedInput={this.state.calendarFocused}
+                            onFocusChange={this.onFocusChange} // PropTypes.func.isRequired,
+                        />
+                    </div>
+                </div>
             </div>
         );
     }

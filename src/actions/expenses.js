@@ -11,12 +11,12 @@ export const addStartState = (expenseData = {}) => { // custom middleware pour a
         const uid = getState().auth.uid;
         const {
             description = '',
-            square = 0,
+            note = 0,
             price = 0,
             createdAt = 1000
         } = expenseData;
 
-        const expense = { description, square, price, createdAt };
+        const expense = { description, note, price, createdAt };
 
         return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => {
             dispatch(addState({
