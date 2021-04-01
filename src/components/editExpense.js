@@ -9,8 +9,10 @@ export class EditExpensePage extends React.Component {
         this.props.history.push('/'); // redirect to route
     }
     onRemove = () => {
+       if(confirm("Are you sure ?")){
         this.props.removeStartState(({ id: this.props.expense.id }));
         this.props.history.push('/'); // redirect to route
+       }
     }
     render() {
         return (
