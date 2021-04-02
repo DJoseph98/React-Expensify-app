@@ -5,6 +5,18 @@ export const login = (uid) => ({
     uid
 });
 
+export const startLoginByEmail = () => {
+    return () => {
+        return firebase.auth().signInWithEmailAndPassword(email, password);
+    }
+}
+
+export const startCreateNewUserByEmail = ({ email, password }) => {
+    return () => {
+        return firebase.auth().createUserWithEmailAndPassword(email, password);
+    }
+}
+
 export const startLoginGoogle = () => {
     return () => {
         return firebase.auth().signInWithPopup(googleAuthProvider); //retourne la popup de connexion google en utilisant le provide créer
@@ -13,11 +25,7 @@ export const startLoginGoogle = () => {
 
 export const startLoginFacebook = () => {
     return () => {
-        return firebase.auth().signInWithPopup(facebookAuthProvider).then((result) => {
-            console.log(result)
-        }).catch((e) => {
-            console.log(e)
-        }); //retourne la popup de connexion facebook en utilisant le provide créer
+        return firebase.auth().signInWithPopup(facebookAuthProvider); //retourne la popup de connexion facebook en utilisant le provide créer
     };
 };
 
