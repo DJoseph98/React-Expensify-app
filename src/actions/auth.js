@@ -5,7 +5,7 @@ export const login = (uid) => ({
     uid
 });
 
-export const startLoginByEmail = () => {
+export const startLoginByEmail = ({ email, password }) => {
     return () => {
         return firebase.auth().signInWithEmailAndPassword(email, password);
     }

@@ -9,9 +9,9 @@ export const LoginPage = ({ startLoginGoogle, startLoginFacebook }) => (
             <h1 className="box-layout__title">Expensify</h1>
             <p>It's time to get your expenses under control.</p>
             <TabsLogin />
-            <div>
-                <button className="button" onClick={startLoginGoogle}>Login with Google</button>
-                <button className="button" onClick={startLoginFacebook}>Login with Facebook</button>
+            <div className="buttons_login">
+                <button className="button" onClick={startLoginGoogle}>Connect with Google</button>
+                <button className="button" onClick={startLoginFacebook}>Connect with Facebook</button>
             </div>
         </div>
     </div>
